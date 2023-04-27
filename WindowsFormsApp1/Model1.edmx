@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище EquipmentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="fk_TypeEquipment" Type="int" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductionDate" Type="date" />
+          <Property Name="DateOfCommission" Type="date" />
+          <Property Name="PurchasePrice" Type="money" />
+          <Property Name="ResidualPrice" Type="money" />
+          <Property Name="PercentageOfWear" Type="smallint" Nullable="false" />
+          <Property Name="fk_Work_NotWork" Type="nvarchar" MaxLength="12" />
+          <Property Name="RequiredRepairs" Type="nvarchar" MaxLength="300" />
+          <Property Name="PreventiveMaintenance" Type="date" />
+          <Property Name="ExtraordinaryRepairs" Type="date" />
+        </EntityType>
+        <EntityType Name="ExtraordinaryRepairs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_EquipmentId" Type="int" />
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreventiveRepairs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_EquipmentId" Type="int" />
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeEquipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <Association Name="FK__Equipment__fk_Ty__3E1D39E1">
+          <End Role="TypeEquipment" Type="Self.TypeEquipment" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeEquipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="fk_TypeEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Extraordi__fk_Eq__7849DB76">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="ExtraordinaryRepairs" Type="Self.ExtraordinaryRepairs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExtraordinaryRepairs">
+              <PropertyRef Name="fk_EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Preventiv__fk_Eq__756D6ECB">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="PreventiveRepairs" Type="Self.PreventiveRepairs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreventiveRepairs">
+              <PropertyRef Name="fk_EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище EquipmentModelContainer">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtraordinaryRepairs" EntityType="Self.ExtraordinaryRepairs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreventiveRepairs" EntityType="Self.PreventiveRepairs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeEquipment" EntityType="Self.TypeEquipment" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Equipment__fk_Ty__3E1D39E1" Association="Self.FK__Equipment__fk_Ty__3E1D39E1">
+            <End Role="TypeEquipment" EntitySet="TypeEquipment" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Extraordi__fk_Eq__7849DB76" Association="Self.FK__Extraordi__fk_Eq__7849DB76">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="ExtraordinaryRepairs" EntitySet="ExtraordinaryRepairs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Preventiv__fk_Eq__756D6ECB" Association="Self.FK__Preventiv__fk_Eq__756D6ECB">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="PreventiveRepairs" EntitySet="PreventiveRepairs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EquipmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fk_TypeEquipment" Type="Int32" />
+          <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionDate" Type="DateTime" Precision="0" />
+          <Property Name="DateOfCommission" Type="DateTime" Precision="0" />
+          <Property Name="PurchasePrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ResidualPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PercentageOfWear" Type="Int16" Nullable="false" />
+          <Property Name="fk_Work_NotWork" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="RequiredRepairs" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PreventiveMaintenance" Type="DateTime" Precision="0" />
+          <Property Name="ExtraordinaryRepairs" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TypeEquipment" Relationship="Self.FK__Equipment__fk_Ty__3E1D39E1" FromRole="Equipment" ToRole="TypeEquipment" />
+          <NavigationProperty Name="ExtraordinaryRepairs1" Relationship="Self.FK__Extraordi__fk_Eq__7849DB76" FromRole="Equipment" ToRole="ExtraordinaryRepairs" />
+          <NavigationProperty Name="PreventiveRepairs" Relationship="Self.FK__Preventiv__fk_Eq__756D6ECB" FromRole="Equipment" ToRole="PreventiveRepairs" />
+        </EntityType>
+        <EntityType Name="ExtraordinaryRepairs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_EquipmentId" Type="Int32" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Operation" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Extraordi__fk_Eq__7849DB76" FromRole="ExtraordinaryRepairs" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="PreventiveRepairs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_EquipmentId" Type="Int32" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Operation" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Preventiv__fk_Eq__756D6ECB" FromRole="PreventiveRepairs" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeEquipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__fk_Ty__3E1D39E1" FromRole="TypeEquipment" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="FK__Equipment__fk_Ty__3E1D39E1">
+          <End Role="TypeEquipment" Type="Self.TypeEquipment" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeEquipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="fk_TypeEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Extraordi__fk_Eq__7849DB76">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="ExtraordinaryRepairs" Type="Self.ExtraordinaryRepairs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExtraordinaryRepairs">
+              <PropertyRef Name="fk_EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Preventiv__fk_Eq__756D6ECB">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="PreventiveRepairs" Type="Self.PreventiveRepairs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreventiveRepairs">
+              <PropertyRef Name="fk_EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Context" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="ExtraordinaryRepairs" EntityType="Self.ExtraordinaryRepairs" />
+          <EntitySet Name="PreventiveRepairs" EntityType="Self.PreventiveRepairs" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeEquipment" EntityType="Self.TypeEquipment" />
+          <AssociationSet Name="FK__Equipment__fk_Ty__3E1D39E1" Association="Self.FK__Equipment__fk_Ty__3E1D39E1">
+            <End Role="TypeEquipment" EntitySet="TypeEquipment" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Extraordi__fk_Eq__7849DB76" Association="Self.FK__Extraordi__fk_Eq__7849DB76">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="ExtraordinaryRepairs" EntitySet="ExtraordinaryRepairs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Preventiv__fk_Eq__756D6ECB" Association="Self.FK__Preventiv__fk_Eq__756D6ECB">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="PreventiveRepairs" EntitySet="PreventiveRepairs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EquipmentModelContainer" CdmEntityContainer="Context">
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="EquipmentModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="fk_TypeEquipment" ColumnName="fk_TypeEquipment" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="DateOfCommission" ColumnName="DateOfCommission" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="ResidualPrice" ColumnName="ResidualPrice" />
+                <ScalarProperty Name="PercentageOfWear" ColumnName="PercentageOfWear" />
+                <ScalarProperty Name="fk_Work_NotWork" ColumnName="fk_Work_NotWork" />
+                <ScalarProperty Name="RequiredRepairs" ColumnName="RequiredRepairs" />
+                <ScalarProperty Name="PreventiveMaintenance" ColumnName="PreventiveMaintenance" />
+                <ScalarProperty Name="ExtraordinaryRepairs" ColumnName="ExtraordinaryRepairs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExtraordinaryRepairs">
+            <EntityTypeMapping TypeName="EquipmentModel.ExtraordinaryRepairs">
+              <MappingFragment StoreEntitySet="ExtraordinaryRepairs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_EquipmentId" ColumnName="fk_EquipmentId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreventiveRepairs">
+            <EntityTypeMapping TypeName="EquipmentModel.PreventiveRepairs">
+              <MappingFragment StoreEntitySet="PreventiveRepairs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_EquipmentId" ColumnName="fk_EquipmentId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EquipmentModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeEquipment">
+            <EntityTypeMapping TypeName="EquipmentModel.TypeEquipment">
+              <MappingFragment StoreEntitySet="TypeEquipment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
