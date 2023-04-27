@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AddPrevetiveRepairs.cs" />
+    <Compile Include="Repositories\AddPrevetiveRepairs.cs" />
     <Compile Include="Enter.cs">
       <SubType>Form</SubType>
     </Compile>
