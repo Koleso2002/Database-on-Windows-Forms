@@ -84,7 +84,20 @@ namespace WindowsFormsApp1.Controllers
             return tb;
         }
 
-
+        public DataTable ShowEquipmentAddRepairs()
+        {
+            using (conn = new SqlConnection(path))
+            {
+                string command = @"Select Equipment.Id,Equipment.Name as 'Оборудование',Equipment.SerialNumber as 'Заводской номер' 
+                                    from Equipment;";
+                SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                tb = ds.Tables[0];
+                
+            }
+            return tb;
+        }
 
     }
 }

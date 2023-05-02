@@ -9,16 +9,20 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.Controllers;
 
 namespace WindowsFormsApp1
 {
     public partial class Form4 : Form
     {
+        private MainRepository repository;
+
+
         private static SqlConnection conn;
         private static string path = @"Data Source=KONSTANTIN\SQLEXPRESS;
                             Initial Catalog=Equipment;
                             Integrated Security=SSPI;";
-        //Form3 form3;
+       
         private int _indexId;
         public int indexId
         {
@@ -32,8 +36,8 @@ namespace WindowsFormsApp1
         public Form4()
         {
             InitializeComponent();
-            //form3 = _form3;
-            Fill();
+            repository=new MainRepository();
+            dataGridView1.DataSource = repository.ShowEquipmentAddRepairs();
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
         }
 
@@ -50,16 +54,7 @@ namespace WindowsFormsApp1
 
         private void Fill()
         {
-            using (conn = new SqlConnection(path))
-            {
-                string command = @"Select Equipment.Id,Equipment.Name as 'Оборудование',Equipment.SerialNumber as 'Заводской номер' 
-                                    from Equipment;";
-                SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds);
-                DataTable tb = ds.Tables[0];
-                dataGridView1.DataSource = tb;
-            }
+            dataGridView1.DataSource = repository.ShowEquipmentAddRepairs();
         }
     }
 }
