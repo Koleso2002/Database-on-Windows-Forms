@@ -52,6 +52,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.ExtraordinaryRepairs = new System.Windows.Forms.TextBox();
             this.Add = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Name
@@ -218,7 +219,7 @@
             this.RequireRepairs.MaxLength = 300;
             this.RequireRepairs.Multiline = true;
             this.RequireRepairs.Name = "RequireRepairs";
-            this.RequireRepairs.Size = new System.Drawing.Size(299, 203);
+            this.RequireRepairs.Size = new System.Drawing.Size(298, 183);
             this.RequireRepairs.TabIndex = 18;
             // 
             // label10
@@ -266,11 +267,23 @@
             this.Add.UseVisualStyleBackColor = true;
             this.Add.Click += new System.EventHandler(this.Add_Click);
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(457, 259);
+            this.label12.MaximumSize = new System.Drawing.Size(400, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(0, 16);
+            this.label12.TabIndex = 24;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.Add);
             this.Controls.Add(this.ExtraordinaryRepairs);
             this.Controls.Add(this.label11);
@@ -295,7 +308,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Name);
-           // this.Name = "Form2";
+            //this.Name = "Form2";
             this.Text = "Form2";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -328,5 +341,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox ExtraordinaryRepairs;
         private System.Windows.Forms.Button Add;
+        private System.Windows.Forms.Label label12;
     }
 }

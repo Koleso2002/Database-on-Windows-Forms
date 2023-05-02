@@ -34,7 +34,6 @@ namespace WindowsFormsApp1
             listView1.Items.Clear();
             using (Context conn = new Context())
             {
-                //var prevRepairs=conn.PreventiveRepairs.Where(x=>x.Id==ind).ToList();
                 var prevRepairs = conn.PreventiveRepairs.Include(x => x.Equipment).Where(x => x.fk_EquipmentId == ind);
 
                 ListViewItem item = null;
@@ -45,11 +44,9 @@ namespace WindowsFormsApp1
                                                           ((double)pp.Price).ToString(), pp.Operation.ToString()});
 
                     listView1.Items.Add(item);
-
                 }
 
             }
-
         }
 
         public void ShowExtraordinaryRepairs()

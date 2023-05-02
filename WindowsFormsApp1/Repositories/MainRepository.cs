@@ -93,8 +93,7 @@ namespace WindowsFormsApp1.Controllers
                 SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
-                tb = ds.Tables[0];
-                
+                tb = ds.Tables[0];  
             }
             return tb;
         }

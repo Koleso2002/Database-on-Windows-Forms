@@ -33,6 +33,7 @@ namespace WindowsFormsApp1
             RequireRepairs.Enabled = false;
             PreventiveRepairs.Enabled = false;
             ExtraordinaryRepairs.Enabled = false;
+            
             WorkNotWork.CheckedChanged += WorkNotWork_CheckedChanged;
             PreventiveRepairs.DoubleClick += PreventiveRepairs_DoubleClick;
             ExtraordinaryRepairs.DoubleClick+= PreventiveRepairs_DoubleClick;
@@ -105,6 +106,7 @@ namespace WindowsFormsApp1
 
         public void ShowPassport(int index)
         {
+            label12.Text = "Двойным щелчком по полю дат вы сможете вывести всю информацию по ремонтам";
             using (Context conn = new Context())
             {
                 equipment = conn.Equipment.Where(x => x.Id == index).FirstOrDefault();
@@ -173,5 +175,7 @@ namespace WindowsFormsApp1
             form5 = new Form5(this);
             form5.Show();
         }
+
+     
     }
 }

@@ -10,19 +10,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.Controllers;
+using WindowsFormsApp1.ModelView;
 
 namespace WindowsFormsApp1
 {
     public partial class Form4 : Form
     {
         private MainRepository repository;
-
-
-        private static SqlConnection conn;
-        private static string path = @"Data Source=KONSTANTIN\SQLEXPRESS;
-                            Initial Catalog=Equipment;
-                            Integrated Security=SSPI;";
-       
         private int _indexId;
         public int indexId
         {
@@ -36,14 +30,14 @@ namespace WindowsFormsApp1
         public Form4()
         {
             InitializeComponent();
-            repository=new MainRepository();
+            repository = new MainRepository();
             dataGridView1.DataSource = repository.ShowEquipmentAddRepairs();
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
         }
 
         private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-           DataGridViewRow row = dataGridView1.CurrentRow;
+            DataGridViewRow row = dataGridView1.CurrentRow;
             if (row.Cells[0].Value.ToString() != String.Empty)
             {
                 indexId = (int)row.Cells[0].Value;
@@ -51,10 +45,5 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-
-        private void Fill()
-        {
-            dataGridView1.DataSource = repository.ShowEquipmentAddRepairs();
-        }
     }
 }
