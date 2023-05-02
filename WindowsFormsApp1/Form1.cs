@@ -82,43 +82,11 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = repository.ShowEquipmentMainWindow();
         }
 
-        //DataTable dataTable = new DataTable();
-
-        //private void ShowAllEquipment()
-        //{
-        //    using (conn = new SqlConnection(path))
-        //    {
-        //        string command = @"select Equipment.Id, Equipment.Name as 'Оборудование', TypeEquipment.Type as 'Тип оборудования',
-        //                                Equipment.SerialNumber as 'Заводской номер', Equipment.ProductionDate as 'Дата выпуска',
-        //                                Equipment.DateOfCommission as 'Дата ввода в эксплуатацию', Equipment.PurchasePrice as 'Стоимость покупки',
-        //                                Equipment.ResidualPrice as 'Остаточная стоимость',Equipment.PercentageOfWear as 'Процент износа',
-        //                                Equipment.fk_Work_NotWork as 'Работает/не работает'
-        //                                from Equipment join TypeEquipment on Equipment.fk_TypeEquipment=TypeEquipment.Id";
-
-        //        SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
-        //        DataSet ds = new DataSet();
-        //        adapter.Fill(ds);
-        //        dataTable = ds.Tables[0];
-        //        dataGridView1.DataSource = dataTable;
-        //    }
-        //}
 
         private void ShowAllPreventiveRepairs()
         {
-            using (conn = new SqlConnection(path))
-            {
-                string command1 = @"select PreventiveRepairs.Id, Equipment.Name, PreventiveRepairs.Data,
-                                    PreventiveRepairs.Price, PreventiveRepairs.Operation
-                                    from PreventiveRepairs join Equipment on PreventiveRepairs.fk_EquipmentId=Equipment.Id;";
-
-
-                SqlDataAdapter adapter = new SqlDataAdapter(command1, conn);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds);
-                DataTable dt = ds.Tables[0];
-
+                DataTable dt = repository.ShowPrevRepairsOnMainWindow();
                 ListViewItem item = null;
-
                 foreach (DataRow row in dt.Select())
                 {
                     List<string> lv = new List<string>();
@@ -130,7 +98,7 @@ namespace WindowsFormsApp1
                     item = new ListViewItem(lv.ToArray());
                     listView1.Items.Add(item);
                 }
-            }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -140,7 +108,6 @@ namespace WindowsFormsApp1
             Thread.Sleep(1000);
             listView1.Items.Clear();
             ShowAllPreventiveRepairs();
-
         }
     }
 }

@@ -20,8 +20,11 @@ namespace WindowsFormsApp1.Controllers
                             Integrated Security=SSPI;";
 
         private ModelPreventivRepairs preventivRepairs;
-        private ModelEquipment modelEquipment;
-        private EquipmentOnMainWindow equipmentOnMainWindow;
+        //private ModelEquipment modelEquipment;
+        //private EquipmentOnMainWindow equipmentOnMainWindow;
+        private PrevRepairsOnMainWindow prevRepairsOnMainWindow;
+        DataTable tb;
+
 
 
         public void AddPreventiveRepairs(ModelPreventivRepairs _preventivRepairs)
@@ -49,7 +52,6 @@ namespace WindowsFormsApp1.Controllers
 
         public DataTable ShowEquipmentMainWindow()
         {
-            DataTable tb;
             using (conn = new SqlConnection(path))
             {
                 string command = @"select Equipment.Id, Equipment.Name as 'Оборудование', TypeEquipment.Type as 'Тип оборудования',
@@ -62,10 +64,27 @@ namespace WindowsFormsApp1.Controllers
                 SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
-                tb = ds.Tables[0];        
+                tb = ds.Tables[0];
             }
             return tb;
-        } 
+        }
+
+        public DataTable ShowPrevRepairsOnMainWindow()
+        {
+            using (conn = new SqlConnection(path))
+            {
+                string command1 = @"select PreventiveRepairs.Id, Equipment.Name, PreventiveRepairs.Data,
+                                    PreventiveRepairs.Price, PreventiveRepairs.Operation
+                                    from PreventiveRepairs join Equipment on PreventiveRepairs.fk_EquipmentId=Equipment.Id;";
+
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command1, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                tb = ds.Tables[0];
+            }
+            return tb;
+        }
 
 
 
