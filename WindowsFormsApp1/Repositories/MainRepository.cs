@@ -84,6 +84,23 @@ namespace WindowsFormsApp1.Controllers
             return tb;
         }
 
+        public DataTable ShowExtraRepairsOnMainWindow()
+        {
+            using (conn = new SqlConnection(path))
+            {
+                string command1 = @"select ExtraordinaryRepairs.Id, Equipment.Name, ExtraordinaryRepairs.Data,
+                                    ExtraordinaryRepairs.Price, ExtraordinaryRepairs.Operation
+                                    from ExtraordinaryRepairs join Equipment on ExtraordinaryRepairs.fk_EquipmentId=Equipment.Id;";
+
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command1, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                tb = ds.Tables[0];
+            }
+            return tb;
+        }
+
         public DataTable ShowEquipmentAddRepairs()
         {
             using (conn = new SqlConnection(path))

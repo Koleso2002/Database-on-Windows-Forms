@@ -65,7 +65,6 @@ namespace WindowsFormsApp1
                     equipment = new Equipment();
                 }
                 else { equipment = _equipment; }
-                TypeEquipment typeEquipment = new TypeEquipment();
                 equipment.Name = Name.Text;
                 equipment.fk_TypeEquipment = Type.SelectedIndex + 1;
                 equipment.SerialNumber = SerialNumber.Text;

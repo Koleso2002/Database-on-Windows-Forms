@@ -56,7 +56,6 @@ namespace WindowsFormsApp1
                 form2.ShowPassport(ind);
                 form2.ShowDialog();
 
-                //ShowAllEquipment();
             }
         }
 
@@ -64,9 +63,10 @@ namespace WindowsFormsApp1
         {
             dataGridView1.DataSource = null;
             listView1.Items.Clear();
+            listView2.Items.Clear();
             dataGridView1.DataSource=repository.ShowEquipmentMainWindow();
-          
             ShowAllPreventiveRepairs();
+            ShowAllExtraRepairs();
             label1.Text = "Двойным щелчком по строке вы можете посмотреть паспорт оборудования";
         }
 
@@ -76,7 +76,6 @@ namespace WindowsFormsApp1
             passport.ShowDialog();
             dataGridView1.DataSource = repository.ShowEquipmentMainWindow();
         }
-
 
         private void ShowAllPreventiveRepairs()
         {
@@ -93,7 +92,23 @@ namespace WindowsFormsApp1
                     item = new ListViewItem(lv.ToArray());
                     listView1.Items.Add(item);
                 }
-            
+        }
+
+        private void ShowAllExtraRepairs()
+        {
+            DataTable dt = repository.ShowExtraRepairsOnMainWindow();
+            ListViewItem item = null;
+            foreach (DataRow row in dt.Select())
+            {
+                List<string> lv = new List<string>();
+                var cells = row.ItemArray;
+                foreach (var cell in cells)
+                {
+                    lv.Add(Convert.ToString(cell));
+                }
+                item = new ListViewItem(lv.ToArray());
+                listView2.Items.Add(item);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
