@@ -27,6 +27,7 @@ namespace WindowsFormsApp1
             repository = new MainRepository();
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
             dataGridView1.CellMouseEnter += DataGridView1_CellMouseEnter;
+            button4.Click += button3_Click;
             if (Roles.Role == RoleType.USER)
             {
                 button2.Visible = false;
@@ -116,7 +117,13 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            form3 = new Form3();
+            ushort flagSender=3;
+            if(sender==button3)
+                flagSender = 3;
+            if(sender==button4)
+                flagSender = 4;
+
+            form3 = new Form3(flagSender);
             form3.ShowDialog();
             Thread.Sleep(1000);
             listView1.Items.Clear();

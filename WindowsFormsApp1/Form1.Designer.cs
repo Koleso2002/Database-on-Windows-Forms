@@ -49,6 +49,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -192,6 +193,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button4);
             this.tabPage5.Controls.Add(this.listView2);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
@@ -209,6 +211,7 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
+            this.listView2.GridLines = true;
             this.listView2.HideSelection = false;
             this.listView2.Location = new System.Drawing.Point(6, 6);
             this.listView2.Name = "listView2";
@@ -245,6 +248,15 @@
             this.columnHeader5.Text = "Что было сделано";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader5.Width = 302;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(17, 342);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(163, 33);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "Добавить";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -287,6 +299,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Button button4;
     }
 }
 

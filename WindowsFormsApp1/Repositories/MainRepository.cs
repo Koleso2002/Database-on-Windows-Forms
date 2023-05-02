@@ -20,6 +20,7 @@ namespace WindowsFormsApp1.Controllers
                             Integrated Security=SSPI;";
 
         private ModelPreventivRepairs preventivRepairs;
+        private ModelExtraOrdinaryRepairs extraOrdinaryRepairs;
         //private ModelEquipment modelEquipment;
         //private EquipmentOnMainWindow equipmentOnMainWindow;
         //private PrevRepairsOnMainWindow prevRepairsOnMainWindow;
@@ -41,6 +42,29 @@ namespace WindowsFormsApp1.Controllers
                 newRow[2] = preventivRepairs.date;
                 newRow[3] = preventivRepairs.price;
                 newRow[4] = preventivRepairs.operation;
+
+                tb.Rows.Add(newRow);
+                SqlCommandBuilder sqlCommand = new SqlCommandBuilder(adapter);
+                adapter.Update(tb);
+            }
+        }
+
+        public void AddExtraRepairs(ModelExtraOrdinaryRepairs _extraOrdinaryRepairs)
+        {
+            extraOrdinaryRepairs= _extraOrdinaryRepairs;
+            using (conn = new SqlConnection(path))
+            {
+                string command = @"select * from ExtraordinaryRepairs;";
+                SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                DataTable tb = ds.Tables[0];
+                DataRow newRow = tb.NewRow();
+
+                newRow[1] = extraOrdinaryRepairs.NameEquipment;
+                newRow[2] = extraOrdinaryRepairs.date;
+                newRow[3] = extraOrdinaryRepairs.price;
+                newRow[4] = extraOrdinaryRepairs.operation;
 
                 tb.Rows.Add(newRow);
                 SqlCommandBuilder sqlCommand = new SqlCommandBuilder(adapter);

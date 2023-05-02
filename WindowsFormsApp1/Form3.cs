@@ -16,14 +16,16 @@ namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
+        ushort flagSender;
         private ModelPreventivRepairs preventivRepairs;
         private MainRepository repository;
 
         Dictionary<int, string> equip = new Dictionary<int, string>();
         Form4 form4;
-        public Form3()
+        public Form3(ushort _flagSender)
         {
             InitializeComponent();
+            flagSender = _flagSender;
             preventivRepairs = new ModelPreventivRepairs();
             repository = new MainRepository();
             textBox2.LostFocus += TextBox2_LostFocus;
@@ -59,8 +61,15 @@ namespace WindowsFormsApp1
         {
             if (AddRepairs())
             {
-                repository.AddPreventiveRepairs(preventivRepairs);
-                this.Close();
+                if (flagSender == 3)
+                {
+                    repository.AddPreventiveRepairs(preventivRepairs);
+                }
+                if (flagSender == 3)
+                {
+                    repository.AddExtraRepairs(preventivRepairs);
+                }
+                    this.Close();
             }
         }
 
