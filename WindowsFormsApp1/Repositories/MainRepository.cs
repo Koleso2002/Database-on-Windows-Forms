@@ -25,8 +25,6 @@ namespace WindowsFormsApp1.Controllers
         //private PrevRepairsOnMainWindow prevRepairsOnMainWindow;
         DataTable tb;
 
-
-
         public void AddPreventiveRepairs(ModelPreventivRepairs _preventivRepairs)
         {
             preventivRepairs = _preventivRepairs;

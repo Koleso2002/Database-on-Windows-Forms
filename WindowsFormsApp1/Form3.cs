@@ -19,14 +19,8 @@ namespace WindowsFormsApp1
         private ModelPreventivRepairs preventivRepairs;
         private MainRepository repository;
 
-        private static SqlConnection conn;
-        private static string path = @"Data Source=KONSTANTIN\SQLEXPRESS;
-                            Initial Catalog=Equipment;
-                            Integrated Security=SSPI;";
-
         Dictionary<int, string> equip = new Dictionary<int, string>();
         Form4 form4;
-
         public Form3()
         {
             InitializeComponent();
@@ -61,53 +55,8 @@ namespace WindowsFormsApp1
             return flag;
         }
 
-
-        //  string eqp;
-        //DateTime date;
-        //double price;
-        //string operations;
-
-        //bool flag = true;
-        //while (flag)
-        //{
-        //    try
-        //    {
-        //        eqp = equip.Where(x => x.Value == textBox1.Text).FirstOrDefault().Key.ToString();
-        //        date = dateTimePicker1.Value;
-        //        price = Double.Parse(textBox2.Text);
-        //        operations = textBox3.Text;
-        //        flag = false;
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("В поле \"Сумма\" неверный формат. Попробуйте ввести копейки через запятую!");
-        //    }
-
-        //    using (conn = new SqlConnection(path))
-        //    {
-        //        string command = @"select * from PreventiveRepairs;";
-        //        SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
-        //        DataSet ds = new DataSet();
-        //        adapter.Fill(ds);
-        //        DataTable tb = ds.Tables[0];
-        //        DataRow newRow = tb.NewRow();
-
-        //        newRow[1] = equip.Where(x => x.Value == textBox1.Text).FirstOrDefault().Key;
-        //        newRow[2] = dateTimePicker1.Value;
-        //        newRow[3] = Double.Parse(textBox2.Text);
-        //        newRow[4] = textBox3.Text;
-
-        //    tb.Rows.Add(newRow);
-        //    SqlCommandBuilder sqlCommand = new SqlCommandBuilder(adapter);
-        //    adapter.Update(tb);
-        //    }
-        //}
-
-
         private void button1_Click(object sender, EventArgs e)
         {
-
             if (AddRepairs())
             {
                 repository.AddPreventiveRepairs(preventivRepairs);
@@ -119,10 +68,8 @@ namespace WindowsFormsApp1
         {
             form4 = new Form4();
             form4.ShowDialog();
-
             int key = form4.indexId;
             if (key != 0)
-
             {
                 DataTable tb = repository.ShowEquipmentMainWindow();
                 equip.Clear();
