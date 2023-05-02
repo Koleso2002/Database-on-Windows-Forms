@@ -16,13 +16,8 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        const string path = @"Data Source=KONSTANTIN\SQLEXPRESS;
-                            Initial Catalog=Equipment;
-                            Integrated Security=SSPI;";
-        SqlConnection conn;
         Form3 form3;
         MainRepository repository;
-
         public Form1()
         {
             InitializeComponent();

@@ -22,7 +22,7 @@ namespace WindowsFormsApp1.Controllers
         private ModelPreventivRepairs preventivRepairs;
         //private ModelEquipment modelEquipment;
         //private EquipmentOnMainWindow equipmentOnMainWindow;
-        private PrevRepairsOnMainWindow prevRepairsOnMainWindow;
+        //private PrevRepairsOnMainWindow prevRepairsOnMainWindow;
         DataTable tb;
 
 

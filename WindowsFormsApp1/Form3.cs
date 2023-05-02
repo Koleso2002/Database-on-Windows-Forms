@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
     public partial class Form3 : Form
     {
         private ModelPreventivRepairs preventivRepairs;
-        private MainRepository addPrevetiveRepairs;
+        private MainRepository repository;
 
         private static SqlConnection conn;
         private static string path = @"Data Source=KONSTANTIN\SQLEXPRESS;
@@ -31,6 +31,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             preventivRepairs = new ModelPreventivRepairs();
+            repository = new MainRepository();
             textBox2.LostFocus += TextBox2_LostFocus;
         }
 
@@ -109,8 +110,7 @@ namespace WindowsFormsApp1
 
             if (AddRepairs())
             {
-                addPrevetiveRepairs = new MainRepository();
-                addPrevetiveRepairs.AddPreventiveRepairs(preventivRepairs);
+                repository.AddPreventiveRepairs(preventivRepairs);
                 this.Close();
             }
         }
@@ -122,21 +122,13 @@ namespace WindowsFormsApp1
 
             int key = form4.indexId;
             if (key != 0)
-            {
-                using (conn = new SqlConnection(path))
-                {
-                    string command = @"Select * from Equipment;";
-                    SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
-                    SqlCommandBuilder sqlCommand = new SqlCommandBuilder(adapter);
-                    DataSet ds = new DataSet();
-                    adapter.Fill(ds);
-                    DataTable tb = ds.Tables[0];
 
-                    equip.Clear();
-                    foreach (DataRow row in tb.Select())
-                    {
-                        equip.Add(Convert.ToInt32(row[0]), Convert.ToString(row[1]));
-                    }
+            {
+                DataTable tb = repository.ShowEquipmentMainWindow();
+                equip.Clear();
+                foreach (DataRow row in tb.Select())
+                {
+                    equip.Add(Convert.ToInt32(row[0]), Convert.ToString(row[1]));
                 }
                 textBox1.Text = equip[key];
             }
