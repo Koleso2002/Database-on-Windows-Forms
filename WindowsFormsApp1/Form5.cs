@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
 
                 foreach (var pp in prevRepairs)
                 {
-                    item = new ListViewItem(new string[] {pp.Id.ToString(),pp.Equipment.Name.ToString(),pp.Data.ToString(),
+                    item = new ListViewItem(new string[] {pp.Id.ToString(),pp.Equipment.Name.ToString(),pp.Data.ToShortDateString(),
                                                           ((double)pp.Price).ToString(), pp.Operation.ToString()});
 
                     listView1.Items.Add(item);
@@ -59,7 +59,7 @@ namespace WindowsFormsApp1
 
                 foreach (var pp in extraRepairs)
                 {
-                    item = new ListViewItem(new string[] {pp.Id.ToString(),pp.Equipment.Name.ToString(),pp.Data.ToString(),
+                    item = new ListViewItem(new string[] {pp.Id.ToString(),pp.Equipment.Name.ToString(),pp.Data.ToShortDateString(),
                                                           pp.Price.ToString(), pp.Operation.ToString()});
 
                     listView2.Items.Add(item);
@@ -68,5 +68,6 @@ namespace WindowsFormsApp1
             }
 
         }
+
     }
 }

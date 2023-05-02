@@ -33,7 +33,6 @@ namespace WindowsFormsApp1
             RequireRepairs.Enabled = false;
             PreventiveRepairs.Enabled = false;
             ExtraordinaryRepairs.Enabled = false;
-            
             WorkNotWork.CheckedChanged += WorkNotWork_CheckedChanged;
             PreventiveRepairs.DoubleClick += PreventiveRepairs_DoubleClick;
             ExtraordinaryRepairs.DoubleClick+= PreventiveRepairs_DoubleClick;

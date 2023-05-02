@@ -81,19 +81,19 @@
             // 
             this.columnHeader3.Text = "Дата ППР";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 94;
+            this.columnHeader3.Width = 115;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Сумма, руб.";
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 115;
+            this.columnHeader4.Width = 119;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Что было сделано";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 312;
+            this.columnHeader5.Width = 272;
             // 
             // tabControl1
             // 
@@ -145,6 +145,7 @@
             this.listView2.TabIndex = 0;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
+            
             // 
             // columnHeader6
             // 
@@ -161,7 +162,7 @@
             // 
             this.columnHeader8.Text = "Дата ремонта";
             this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader8.Width = 85;
+            this.columnHeader8.Width = 125;
             // 
             // columnHeader9
             // 
