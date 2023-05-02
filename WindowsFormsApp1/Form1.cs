@@ -23,13 +23,13 @@ namespace WindowsFormsApp1
             InitializeComponent();
             Enter enter = new Enter(this);
             enter.ShowDialog();
-            label1.Text=string.Empty;
-            repository=new MainRepository();
+            label1.Text = string.Empty;
+            repository = new MainRepository();
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
             dataGridView1.CellMouseEnter += DataGridView1_CellMouseEnter;
             if (Roles.Role == RoleType.USER)
             {
-                button2.Visible=false;
+                button2.Visible = false;
                 tabPage2.Parent = null;
                 tabPage5.Parent = null;
             }
@@ -61,12 +61,15 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (Roles.Role == RoleType.ADMIN)
+            {
+                listView1.Items.Clear();
+                listView2.Items.Clear();
+                ShowAllPreventiveRepairs();
+                ShowAllExtraRepairs();
+            }
             dataGridView1.DataSource = null;
-            listView1.Items.Clear();
-            listView2.Items.Clear();
-            dataGridView1.DataSource=repository.ShowEquipmentMainWindow();
-            ShowAllPreventiveRepairs();
-            ShowAllExtraRepairs();
+            dataGridView1.DataSource = repository.ShowEquipmentMainWindow();
             label1.Text = "Двойным щелчком по строке вы можете посмотреть паспорт оборудования";
         }
 
@@ -79,19 +82,19 @@ namespace WindowsFormsApp1
 
         private void ShowAllPreventiveRepairs()
         {
-                DataTable dt = repository.ShowPrevRepairsOnMainWindow();
-                ListViewItem item = null;
-                foreach (DataRow row in dt.Select())
+            DataTable dt = repository.ShowPrevRepairsOnMainWindow();
+            ListViewItem item = null;
+            foreach (DataRow row in dt.Select())
+            {
+                List<string> lv = new List<string>();
+                var cells = row.ItemArray;
+                foreach (var cell in cells)
                 {
-                    List<string> lv = new List<string>();
-                    var cells = row.ItemArray;
-                    foreach (var cell in cells)
-                    {
-                        lv.Add(Convert.ToString(cell));
-                    }
-                    item = new ListViewItem(lv.ToArray());
-                    listView1.Items.Add(item);
+                    lv.Add(Convert.ToString(cell));
                 }
+                item = new ListViewItem(lv.ToArray());
+                listView1.Items.Add(item);
+            }
         }
 
         private void ShowAllExtraRepairs()
