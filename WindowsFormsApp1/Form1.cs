@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.Controllers;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApp1
@@ -20,6 +21,7 @@ namespace WindowsFormsApp1
                             Integrated Security=SSPI;";
         SqlConnection conn;
         Form3 form3;
+        MainRepository repository;
 
         public Form1()
         {
@@ -27,6 +29,7 @@ namespace WindowsFormsApp1
             Enter enter = new Enter(this);
             enter.ShowDialog();
             label1.Text=string.Empty;
+            repository=new MainRepository();
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
             dataGridView1.CellMouseEnter += DataGridView1_CellMouseEnter;
             if (Roles.Role == RoleType.USER)
@@ -57,7 +60,8 @@ namespace WindowsFormsApp1
                 Form2 form2 = new Form2();
                 form2.ShowPassport(ind);
                 form2.ShowDialog();
-                ShowAllEquipment();
+
+                //ShowAllEquipment();
             }
         }
 
@@ -65,7 +69,8 @@ namespace WindowsFormsApp1
         {
             dataGridView1.DataSource = null;
             listView1.Items.Clear();
-            ShowAllEquipment();
+            dataGridView1.DataSource=repository.ShowEquipmentMainWindow();
+          
             ShowAllPreventiveRepairs();
             label1.Text = "Двойным щелчком по строке вы можете посмотреть паспорт оборудования";
         }
@@ -74,29 +79,29 @@ namespace WindowsFormsApp1
         {
             Form2 passport = new Form2();
             passport.ShowDialog();
-            ShowAllEquipment();
+            dataGridView1.DataSource = repository.ShowEquipmentMainWindow();
         }
 
-        DataTable dataTable = new DataTable();
+        //DataTable dataTable = new DataTable();
 
-        private void ShowAllEquipment()
-        {
-            using (conn = new SqlConnection(path))
-            {
-                string command = @"select Equipment.Id, Equipment.Name as 'Оборудование', TypeEquipment.Type as 'Тип оборудования',
-                                        Equipment.SerialNumber as 'Заводской номер', Equipment.ProductionDate as 'Дата выпуска',
-                                        Equipment.DateOfCommission as 'Дата ввода в эксплуатацию', Equipment.PurchasePrice as 'Стоимость покупки',
-                                        Equipment.ResidualPrice as 'Остаточная стоимость',Equipment.PercentageOfWear as 'Процент износа',
-                                        Equipment.fk_Work_NotWork as 'Работает/не работает'
-                                        from Equipment join TypeEquipment on Equipment.fk_TypeEquipment=TypeEquipment.Id";
+        //private void ShowAllEquipment()
+        //{
+        //    using (conn = new SqlConnection(path))
+        //    {
+        //        string command = @"select Equipment.Id, Equipment.Name as 'Оборудование', TypeEquipment.Type as 'Тип оборудования',
+        //                                Equipment.SerialNumber as 'Заводской номер', Equipment.ProductionDate as 'Дата выпуска',
+        //                                Equipment.DateOfCommission as 'Дата ввода в эксплуатацию', Equipment.PurchasePrice as 'Стоимость покупки',
+        //                                Equipment.ResidualPrice as 'Остаточная стоимость',Equipment.PercentageOfWear as 'Процент износа',
+        //                                Equipment.fk_Work_NotWork as 'Работает/не работает'
+        //                                from Equipment join TypeEquipment on Equipment.fk_TypeEquipment=TypeEquipment.Id";
 
-                SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds);
-                dataTable = ds.Tables[0];
-                dataGridView1.DataSource = dataTable;
-            }
-        }
+        //        SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
+        //        DataSet ds = new DataSet();
+        //        adapter.Fill(ds);
+        //        dataTable = ds.Tables[0];
+        //        dataGridView1.DataSource = dataTable;
+        //    }
+        //}
 
         private void ShowAllPreventiveRepairs()
         {

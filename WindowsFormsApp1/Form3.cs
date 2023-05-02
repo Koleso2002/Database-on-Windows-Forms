@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
     public partial class Form3 : Form
     {
         private ModelPreventivRepairs preventivRepairs;
-        private AddPrevetiveRepairs addPrevetiveRepairs;
+        private MainRepository addPrevetiveRepairs;
 
         private static SqlConnection conn;
         private static string path = @"Data Source=KONSTANTIN\SQLEXPRESS;
@@ -50,7 +50,7 @@ namespace WindowsFormsApp1
         private bool AddRepairs()
         {
             bool flag = false;
-            preventivRepairs.NameEquipment = textBox1.Text;
+            preventivRepairs.NameEquipment = equip.Where(x => x.Value == textBox1.Text).FirstOrDefault().Key.ToString();
             preventivRepairs.date = dateTimePicker1.Value;
             if (textBox3.Text != string.Empty)
             {
@@ -109,7 +109,8 @@ namespace WindowsFormsApp1
 
             if (AddRepairs())
             {
-                addPrevetiveRepairs = new AddPrevetiveRepairs(preventivRepairs);
+                addPrevetiveRepairs = new MainRepository();
+                addPrevetiveRepairs.AddPreventiveRepairs(preventivRepairs);
                 this.Close();
             }
         }
