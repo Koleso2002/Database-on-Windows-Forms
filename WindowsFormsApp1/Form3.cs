@@ -40,9 +40,9 @@ namespace WindowsFormsApp1
 
         private void TextBox2_LostFocus(object sender, EventArgs e)
         {
-            
             if (Double.TryParse(textBox2.Text, out var pr))
             {
+
                 preventivRepairs.price = pr;
             }
             else
@@ -55,8 +55,7 @@ namespace WindowsFormsApp1
         private bool AddRepairs()
         {
             bool flag = false;
-            //preventivRepairs.NameEquipment = equip.Where(x => x.Value == textBox1.Text && x.Key== idEquipment).FirstOrDefault().Key.ToString();
-            preventivRepairs.IdEquipment=idEquipment;
+            preventivRepairs.IdEquipment = idEquipment;
             preventivRepairs.date = dateTimePicker1.Value;
             if (textBox3.Text != string.Empty)
             {
@@ -68,8 +67,6 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
             if (AddRepairs())
             {
                 if (flagSender == 3)
@@ -80,7 +77,7 @@ namespace WindowsFormsApp1
                 {
                     repository.AddExtraRepairs(extraOrdinaryRepairs);
                 }
-                    this.Close();
+                this.Close();
             }
         }
 
