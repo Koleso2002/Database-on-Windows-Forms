@@ -61,6 +61,7 @@
     <Compile Include="Models\ModelEquipment.cs" />
     <Compile Include="Models\ModelExtraOrdinaryRepairs.cs" />
     <Compile Include="Models\ModelTypeEquipment.cs" />
+    <Compile Include="Models\ModelOverRepair.cs" />
     <Compile Include="ModelView\EquipmentOnAddRepairs.cs" />
     <Compile Include="ModelView\EquipmentOnMainWindow.cs" />
     <Compile Include="ModelView\ExtraRepairsOnMainWindow.cs" />

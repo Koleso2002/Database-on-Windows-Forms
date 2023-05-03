@@ -18,21 +18,29 @@ namespace WindowsFormsApp1
     {
         ushort flagSender;
         private ModelPreventivRepairs preventivRepairs;
+        private ModelExtraOrdinaryRepairs extraOrdinaryRepairs;
+        //private ModelOverRepair overRepair;
         private MainRepository repository;
 
         Dictionary<int, string> equip = new Dictionary<int, string>();
+        int idEquipment;
         Form4 form4;
         public Form3(ushort _flagSender)
         {
             InitializeComponent();
             flagSender = _flagSender;
             preventivRepairs = new ModelPreventivRepairs();
+            extraOrdinaryRepairs = new ModelExtraOrdinaryRepairs();
+            //overRepair = new ModelOverRepair();
             repository = new MainRepository();
             textBox2.LostFocus += TextBox2_LostFocus;
+
+
         }
 
         private void TextBox2_LostFocus(object sender, EventArgs e)
         {
+            
             if (Double.TryParse(textBox2.Text, out var pr))
             {
                 preventivRepairs.price = pr;
@@ -47,7 +55,8 @@ namespace WindowsFormsApp1
         private bool AddRepairs()
         {
             bool flag = false;
-            preventivRepairs.NameEquipment = equip.Where(x => x.Value == textBox1.Text).FirstOrDefault().Key.ToString();
+            //preventivRepairs.NameEquipment = equip.Where(x => x.Value == textBox1.Text && x.Key== idEquipment).FirstOrDefault().Key.ToString();
+            preventivRepairs.IdEquipment=idEquipment;
             preventivRepairs.date = dateTimePicker1.Value;
             if (textBox3.Text != string.Empty)
             {
@@ -59,15 +68,17 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
             if (AddRepairs())
             {
                 if (flagSender == 3)
                 {
                     repository.AddPreventiveRepairs(preventivRepairs);
                 }
-                if (flagSender == 3)
+                if (flagSender == 4)
                 {
-                    repository.AddExtraRepairs(preventivRepairs);
+                    repository.AddExtraRepairs(extraOrdinaryRepairs);
                 }
                     this.Close();
             }
@@ -77,8 +88,8 @@ namespace WindowsFormsApp1
         {
             form4 = new Form4();
             form4.ShowDialog();
-            int key = form4.indexId;
-            if (key != 0)
+            idEquipment = form4.indexId;
+            if (idEquipment != 0)
             {
                 DataTable tb = repository.ShowEquipmentMainWindow();
                 equip.Clear();
@@ -86,7 +97,7 @@ namespace WindowsFormsApp1
                 {
                     equip.Add(Convert.ToInt32(row[0]), Convert.ToString(row[1]));
                 }
-                textBox1.Text = equip[key];
+                textBox1.Text = equip[idEquipment];
             }
         }
     }

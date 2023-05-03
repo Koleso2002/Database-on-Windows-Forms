@@ -21,6 +21,8 @@ namespace WindowsFormsApp1.Controllers
 
         private ModelPreventivRepairs preventivRepairs;
         private ModelExtraOrdinaryRepairs extraOrdinaryRepairs;
+
+        private ModelOverRepair overRepair;
         //private ModelEquipment modelEquipment;
         //private EquipmentOnMainWindow equipmentOnMainWindow;
         //private PrevRepairsOnMainWindow prevRepairsOnMainWindow;
@@ -38,7 +40,7 @@ namespace WindowsFormsApp1.Controllers
                 DataTable tb = ds.Tables[0];
                 DataRow newRow = tb.NewRow();
 
-                newRow[1] = preventivRepairs.NameEquipment;
+                newRow[1] = preventivRepairs.IdEquipment;
                 newRow[2] = preventivRepairs.date;
                 newRow[3] = preventivRepairs.price;
                 newRow[4] = preventivRepairs.operation;
@@ -51,7 +53,7 @@ namespace WindowsFormsApp1.Controllers
 
         public void AddExtraRepairs(ModelExtraOrdinaryRepairs _extraOrdinaryRepairs)
         {
-            extraOrdinaryRepairs= _extraOrdinaryRepairs;
+            extraOrdinaryRepairs = _extraOrdinaryRepairs;
             using (conn = new SqlConnection(path))
             {
                 string command = @"select * from ExtraordinaryRepairs;";
@@ -61,7 +63,7 @@ namespace WindowsFormsApp1.Controllers
                 DataTable tb = ds.Tables[0];
                 DataRow newRow = tb.NewRow();
 
-                newRow[1] = extraOrdinaryRepairs.NameEquipment;
+                newRow[1] = extraOrdinaryRepairs.IdEquipment;
                 newRow[2] = extraOrdinaryRepairs.date;
                 newRow[3] = extraOrdinaryRepairs.price;
                 newRow[4] = extraOrdinaryRepairs.operation;
@@ -134,7 +136,7 @@ namespace WindowsFormsApp1.Controllers
                 SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
-                tb = ds.Tables[0];  
+                tb = ds.Tables[0];
             }
             return tb;
         }
