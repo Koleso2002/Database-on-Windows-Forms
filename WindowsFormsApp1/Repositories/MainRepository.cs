@@ -22,7 +22,6 @@ namespace WindowsFormsApp1.Controllers
         private ModelPreventivRepairs preventivRepairs;
         private ModelExtraOrdinaryRepairs extraOrdinaryRepairs;
 
-        private ModelOverRepair overRepair;
         //private ModelEquipment modelEquipment;
         //private EquipmentOnMainWindow equipmentOnMainWindow;
         //private PrevRepairsOnMainWindow prevRepairsOnMainWindow;

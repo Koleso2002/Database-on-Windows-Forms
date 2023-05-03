@@ -117,17 +117,24 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ushort flagSender=3;
-            if(sender==button3)
+            ushort flagSender = 3;
+            if (sender == button3)
                 flagSender = 3;
-            if(sender==button4)
+            if (sender == button4)
                 flagSender = 4;
-
             form3 = new Form3(flagSender);
             form3.ShowDialog();
             Thread.Sleep(1000);
-            listView1.Items.Clear();
-            ShowAllPreventiveRepairs();
+            if (flagSender == 3)
+            {
+                listView1.Items.Clear();
+                ShowAllPreventiveRepairs();
+            }
+            if (flagSender == 4)
+            {
+                listView2.Items.Clear();
+                ShowAllExtraRepairs();
+            }
         }
     }
 }

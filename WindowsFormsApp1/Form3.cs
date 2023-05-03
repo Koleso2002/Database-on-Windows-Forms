@@ -19,7 +19,6 @@ namespace WindowsFormsApp1
         ushort flagSender;
         private ModelPreventivRepairs preventivRepairs;
         private ModelExtraOrdinaryRepairs extraOrdinaryRepairs;
-        //private ModelOverRepair overRepair;
         private MainRepository repository;
 
         Dictionary<int, string> equip = new Dictionary<int, string>();
@@ -31,10 +30,8 @@ namespace WindowsFormsApp1
             flagSender = _flagSender;
             preventivRepairs = new ModelPreventivRepairs();
             extraOrdinaryRepairs = new ModelExtraOrdinaryRepairs();
-            //overRepair = new ModelOverRepair();
             repository = new MainRepository();
             textBox2.LostFocus += TextBox2_LostFocus;
-
 
         }
 
@@ -42,8 +39,10 @@ namespace WindowsFormsApp1
         {
             if (Double.TryParse(textBox2.Text, out var pr))
             {
-
-                preventivRepairs.price = pr;
+                if (flagSender == 3)
+                    preventivRepairs.price = pr;
+                if (flagSender == 4)
+                    extraOrdinaryRepairs.price = pr;
             }
             else
             {
@@ -55,11 +54,22 @@ namespace WindowsFormsApp1
         private bool AddRepairs()
         {
             bool flag = false;
-            preventivRepairs.IdEquipment = idEquipment;
-            preventivRepairs.date = dateTimePicker1.Value;
+            if (flagSender == 3)
+            {
+                preventivRepairs.IdEquipment = idEquipment;
+                preventivRepairs.date = dateTimePicker1.Value;
+            }
+            if (flagSender == 4)
+            {
+                extraOrdinaryRepairs.IdEquipment = idEquipment;
+                extraOrdinaryRepairs.date = dateTimePicker1.Value;
+            }
             if (textBox3.Text != string.Empty)
             {
-                preventivRepairs.operation = textBox3.Text;
+                if (flagSender == 3)
+                    preventivRepairs.operation = textBox3.Text;
+                if (flagSender == 4)
+                    extraOrdinaryRepairs.operation = textBox3.Text;
                 flag = true;
             }
             return flag;
