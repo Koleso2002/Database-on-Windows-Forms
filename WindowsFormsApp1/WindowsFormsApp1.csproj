@@ -96,7 +96,6 @@
     <Compile Include="Form5.Designer.cs">
       <DependentUpon>Form5.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>

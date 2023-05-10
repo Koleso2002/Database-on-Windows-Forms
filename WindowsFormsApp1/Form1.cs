@@ -28,6 +28,9 @@ namespace WindowsFormsApp1
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
             dataGridView1.CellMouseEnter += DataGridView1_CellMouseEnter;
             button4.Click += button3_Click;
+            listView2.MouseClick += ListView2_MouseClick;
+            listView1.MouseClick += ListView2_MouseClick;
+
             if (Roles.Role == RoleType.USER)
             {
                 button2.Visible = false;
@@ -134,6 +137,44 @@ namespace WindowsFormsApp1
             {
                 listView2.Items.Clear();
                 ShowAllExtraRepairs();
+            }
+        }
+
+        int IdExtrarepairs;
+        int IdPrevRepairs;
+
+        private void ListView2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right) return;
+            contextMenuStrip1.Show(Cursor.Position);
+            if (sender == listView2)
+            {
+                var lv2 = sender as System.Windows.Forms.ListView;
+                var item = lv2.HitTest(e.Location).Item;
+                int.TryParse(item.Text, out IdExtrarepairs);
+            }
+            if (sender == listView1)
+            {
+                var lv2 = sender as System.Windows.Forms.ListView;
+                var item = lv2.HitTest(e.Location).Item;
+                int.TryParse(item.Text, out IdPrevRepairs);
+            }
+
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (IdExtrarepairs != 0)
+            {
+                repository.DeleteExtraRepairs(IdExtrarepairs);
+                listView2.Items.Clear();
+                ShowAllExtraRepairs();
+            }
+            else
+            {
+                repository.DeletePrevRepairs(IdPrevRepairs); 
+                listView1.Items.Clear();
+                ShowAllPreventiveRepairs();
             }
         }
     }

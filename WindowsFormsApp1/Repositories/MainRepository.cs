@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -50,11 +51,23 @@ namespace WindowsFormsApp1.Controllers
             }
         }
 
+        public void DeletePrevRepairs(int _id)
+        {
+            using (conn = new SqlConnection(path))
+            {
+                conn.Open();
+                string command = $"Delete from PreventiveRepairs where Id={_id};";
+                SqlCommand cmd = new SqlCommand(command, conn);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public void AddExtraRepairs(ModelExtraOrdinaryRepairs _extraOrdinaryRepairs)
         {
             extraOrdinaryRepairs = _extraOrdinaryRepairs;
             using (conn = new SqlConnection(path))
             {
+
                 string command = @"select * from ExtraordinaryRepairs;";
                 SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
                 DataSet ds = new DataSet();
@@ -70,6 +83,18 @@ namespace WindowsFormsApp1.Controllers
                 tb.Rows.Add(newRow);
                 SqlCommandBuilder sqlCommand = new SqlCommandBuilder(adapter);
                 adapter.Update(tb);
+            }
+        }
+
+        public void DeleteExtraRepairs(int _id)
+        {
+            using (conn = new SqlConnection(path))
+            {
+                conn.Open();
+                string command = $"Delete from ExtraordinaryRepairs where Id={_id};";
+                SqlCommand cmd=new SqlCommand(command, conn);
+                cmd.ExecuteNonQuery();
+
             }
         }
 
